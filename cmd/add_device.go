@@ -23,7 +23,7 @@ var (
 
 var (
 	defaultEndpointURL = "https://api.day.app"
-	exampleURLPattern  = regexp.MustCompile(`(?P<url>https?://[/.\-\w]+)/(?P<key>[\w]{20,})/`)
+	exampleURLPattern  = regexp.MustCompile(`(?P<url>https?://[/.\-\w]+)/(?P<key>[\w]{20,})/?`)
 )
 
 // addDeviceCmd represents the device command

@@ -1,2 +1,3 @@
 # barkme
-Push notifications to iOS devices with Bark from CLI
+
+Push notifications to iOS devices with Bark from CLI.

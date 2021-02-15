@@ -1,22 +1,10 @@
 package util
 
 import (
-	"encoding/json"
-	"fmt"
 	"strings"
 
-	"bitbucket.org/ai69/so-colorful/colorcode"
 	"github.com/olekukonko/tablewriter"
 )
-
-// PrintColorfulJSON marshals data into JSON and output to console with syntax highlighting.
-func PrintColorfulJSON(data interface{}) {
-	if body, err := json.MarshalIndent(data, "", "  "); err != nil {
-		fmt.Println("null")
-	} else {
-		fmt.Println(colorcode.JSON(string(body)))
-	}
-}
 
 // RenderTableString renders the rows as table and returns as string for console.
 func RenderTableString(header []string, rows [][]string) string {
