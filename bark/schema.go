@@ -12,7 +12,7 @@ type Device struct {
 }
 
 func (d Device) String() string {
-	return fmt.Sprintf("{Device:%s@%s}", d.deviceKey, d.endpointURL)
+	return fmt.Sprintf("(Dev: %s @ %s)", d.deviceKey, d.endpointURL)
 }
 
 // Options represents options for notification request.
@@ -27,13 +27,13 @@ type Options struct {
 func (o Options) String() string {
 	var parts []string
 	if isNotBlank(string(o.Ringtone)) {
-		parts = append(parts, fmt.Sprintf("Ringtone:%s", o.Ringtone))
+		parts = append(parts, fmt.Sprintf("Ringtone=%s", o.Ringtone))
 	}
 	if isNotBlank(o.OpenURL) {
-		parts = append(parts, fmt.Sprintf("URL:%s", o.OpenURL))
+		parts = append(parts, fmt.Sprintf("URL=%s", o.OpenURL))
 	}
 	if isNotBlank(o.CopyText) {
-		parts = append(parts, fmt.Sprintf("Copy:%q", o.CopyText))
+		parts = append(parts, fmt.Sprintf("Copy=%q", o.CopyText))
 	}
 	if o.ForceArchive {
 		parts = append(parts, "Archive")
@@ -41,5 +41,5 @@ func (o Options) String() string {
 	if o.ForceCopy {
 		parts = append(parts, "AutoCopy")
 	}
-	return "{" + strings.Join(parts, ",") + "}"
+	return fmt.Sprintf("(Opt: %s)", strings.Join(parts, ", "))
 }
