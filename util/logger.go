@@ -46,7 +46,6 @@ var (
 
 // NewLogger returns a Logger with given log path and debug mode.
 func NewLogger(fileName string, debug bool) *Logger {
-
 	// log enablers
 	minLevel := zap.NewAtomicLevelAt(zap.DebugLevel)
 	normalLevelEnabler := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {

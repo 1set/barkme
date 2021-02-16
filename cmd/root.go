@@ -90,14 +90,20 @@ func initConfig() {
 			log.Fatalw("fail to find homedir", zap.Error(err))
 		}
 
-		// Search config in current directory and home directory with name ".barkme" (without extension).
+		// Create config directory under user's home directory
+		dirName := yos.JoinPath(home, ".config", "barkme")
+		if err := yos.MakeDir(dirName); err != nil {
+			log.Fatalw("fail to create config dir", zap.Error(err))
+		}
+
+		// Search config in current directory and config directory (without extension).
 		viper.AddConfigPath(".")
-		viper.AddConfigPath(home)
-		viper.SetConfigName(".barkme")
+		viper.AddConfigPath(dirName)
+		viper.SetConfigName("config")
 		viper.SetConfigType("yaml")
 
 		// Create if config file doesn't exist
-		fallbackConfigFile = yos.JoinPath(home, ".barkme.yaml")
+		fallbackConfigFile = yos.JoinPath(dirName, "config.yaml")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
