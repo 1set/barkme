@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/1set/barkme/bark"
 	"github.com/1set/gut/ystring"
 	"github.com/spf13/cobra"
@@ -46,6 +48,17 @@ var sendCmd = &cobra.Command{
 				}
 				devices = append(devices, dev)
 			}
+		}
+
+		isRingFound := false
+		for _, r := range bark.AllRingtones {
+			if string(r) == ringtone {
+				isRingFound = true
+				break
+			}
+		}
+		if !isRingFound {
+			return fmt.Errorf("invalid ringtone: %v", ringtone)
 		}
 
 		opts := bark.Options{
