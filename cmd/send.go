@@ -50,15 +50,18 @@ var sendCmd = &cobra.Command{
 			}
 		}
 
-		isRingFound := false
-		for _, r := range bark.AllRingtones {
-			if string(r) == ringtone {
-				isRingFound = true
-				break
+		// check if the given ringtone is valid
+		if ystring.IsNotEmpty(ringtone) {
+			isRingFound := false
+			for _, r := range bark.AllRingtones {
+				if string(r) == ringtone {
+					isRingFound = true
+					break
+				}
 			}
-		}
-		if !isRingFound {
-			return fmt.Errorf("invalid ringtone: %v", ringtone)
+			if !isRingFound {
+				return fmt.Errorf("invalid ringtone: %v", ringtone)
+			}
 		}
 
 		opts := bark.Options{

@@ -4,6 +4,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/1set/gut/yos"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	lj "gopkg.in/natefinch/lumberjack.v2"
@@ -37,8 +38,9 @@ var (
 		return true
 	})
 	// log encoders
-	consoleEncoder = zapcore.NewConsoleEncoder(*getEncoderConfig(zapcore.CapitalColorLevelEncoder))
-	jsonEncoder    = zapcore.NewJSONEncoder(*getEncoderConfig(zapcore.LowercaseLevelEncoder))
+	consoleColorEncoder = zapcore.NewConsoleEncoder(*getEncoderConfig(zapcore.CapitalColorLevelEncoder))
+	consoleMonoEncoder  = zapcore.NewConsoleEncoder(*getEncoderConfig(zapcore.CapitalLevelEncoder))
+	jsonEncoder         = zapcore.NewJSONEncoder(*getEncoderConfig(zapcore.LowercaseLevelEncoder))
 	// std log writers
 	writeStdout = zapcore.AddSync(os.Stdout)
 	writeStderr = zapcore.AddSync(os.Stderr)
@@ -55,10 +57,16 @@ func NewLogger(fileName string, debug bool) *Logger {
 		return lvl >= zapcore.ErrorLevel && lvl >= minLevel.Level()
 	})
 
+	// log level encoder
+	encoder := consoleColorEncoder
+	if yos.IsOnWindows() {
+		encoder = consoleMonoEncoder
+	}
+
 	// combine core for logger
 	cores := []zapcore.Core{
-		zapcore.NewCore(consoleEncoder, writeStdout, normalLevelEnabler),
-		zapcore.NewCore(consoleEncoder, writeStderr, errorLevelEnabler),
+		zapcore.NewCore(encoder, writeStdout, normalLevelEnabler),
+		zapcore.NewCore(encoder, writeStderr, errorLevelEnabler),
 	}
 	// set log file path as per parameters
 	if logPath := strings.TrimSpace(fileName); len(logPath) > 0 {
