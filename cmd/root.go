@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	cl "bitbucket.org/ai69/so-colorful/colorlogo"
 	"github.com/1set/barkme/util"
 	"github.com/1set/gut/yos"
 	"github.com/1set/gut/ystring"
@@ -38,7 +37,6 @@ var (
   ██████╔╝██║  ██║██║  ██║██║  ██╗██║ ╚═╝ ██║███████╗
   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
 `
-	colorLogoArt = cl.RoseWaterByColumn(logoArt)
 )
 
 // rootCmd represents the base command when called without any subcommands
