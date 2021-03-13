@@ -29,7 +29,7 @@ var listDeviceCmd = &cobra.Command{
 		for name, dev := range config.DeviceMap {
 			var mark string
 			if name == config.DefaultName {
-				mark = "✔"
+				mark = checkMark
 			}
 			devices = append(devices, []string{
 				name,

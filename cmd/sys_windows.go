@@ -1,3 +1,6 @@
 package cmd
 
-var colorLogoArt = logoArt
+var (
+	colorLogoArt = logoArt
+	checkMark    = "√"
+)
