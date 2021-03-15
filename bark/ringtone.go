@@ -42,6 +42,7 @@ const (
 
 // AllRingtones contains all available built-in ringtones.
 var AllRingtones = []RingtoneName{
+	RingtoneSilence,
 	RingtoneAlarm,
 	RingtoneAnticipate,
 	RingtoneBell,
