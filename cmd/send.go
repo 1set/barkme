@@ -74,26 +74,30 @@ var sendCmd = &cobra.Command{
 
 		for i, dev := range devices {
 			l := log.With("num", i+1, "device", dev, "option", opts)
-			switch {
-			case ystring.IsBlank(title) && ystring.IsBlank(body):
-				if err := dev.Ping(opts); err != nil {
-					l.Warnw("fail to ping", zap.Error(err))
-				} else {
-					l.Infow("ping device")
-				}
-			case ystring.IsBlank(title) && ystring.IsNotBlank(body):
-				if err := dev.SendShortMessage(body, opts); err != nil {
-					l.Warnw("fail to send short message", "body", body, zap.Error(err))
-				} else {
-					l.Infow("send short message", "body", body)
-				}
-			case ystring.IsNotBlank(title) && ystring.IsNotBlank(body):
+			switch hasTitle, hasBody := ystring.IsNotBlank(title), ystring.IsNotBlank(body); {
+			case hasTitle && hasBody:
 				if err := dev.SendMessage(title, body, opts); err != nil {
 					l.Warnw("fail to send message", "title", title, "body", body, zap.Error(err))
 				} else {
 					l.Infow("send message", "title", title, "body", body)
 				}
+			case hasTitle:
+				body = title
+				fallthrough
+			case hasBody:
+				if err := dev.SendShortMessage(body, opts); err != nil {
+					l.Warnw("fail to send short message", "body", body, zap.Error(err))
+				} else {
+					l.Infow("send short message", "body", body)
+				}
+			case !(hasTitle || hasBody):
+				fallthrough
 			default:
+				if err := dev.Ping(opts); err != nil {
+					l.Warnw("fail to ping", zap.Error(err))
+				} else {
+					l.Infow("ping device")
+				}
 				l.Warnw("not supported message", "title", title, "body", body)
 			}
 		}
