@@ -6,6 +6,7 @@ type RingtoneName string
 // Name of available built-in ringtones of Bark app
 const (
 	RingtoneDefault            RingtoneName = ""
+	RingtoneSilence            RingtoneName = "silence"
 	RingtoneAlarm              RingtoneName = "alarm"
 	RingtoneAnticipate         RingtoneName = "anticipate"
 	RingtoneBell               RingtoneName = "bell"
@@ -31,7 +32,6 @@ const (
 	RingtonePaymentSuccess     RingtoneName = "paymentsuccess"
 	RingtoneShake              RingtoneName = "shake"
 	RingtoneSherwoodForest     RingtoneName = "sherwoodforest"
-	RingtoneSilence            RingtoneName = "silence"
 	RingtoneSpell              RingtoneName = "spell"
 	RingtoneSuspense           RingtoneName = "suspense"
 	RingtoneTelegraph          RingtoneName = "telegraph"

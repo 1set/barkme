@@ -13,8 +13,8 @@ cloud.google.com/go/firestore v1.1.0/go.mod h1:ulACoGHTpvq5r8rxGJ4ddJZBZqakUQqCl
 cloud.google.com/go/pubsub v1.0.1/go.mod h1:R0Gpsv3s54REJCy4fxDixWD93lHJMoZTyQ2kNxGRt3I=
 cloud.google.com/go/storage v1.0.0/go.mod h1:IhtSnM/ZTZV8YYJWCY8RULGVqBDmpoyjwiyrjsg+URw=
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
-github.com/1set/barkme/bark v0.0.0-20210216112723-5f8748e0b3ca h1:x/xO9nz/Xmk1JRvQdhc3etruwr0tbE2KMuRlCJwcAVg=
-github.com/1set/barkme/bark v0.0.0-20210216112723-5f8748e0b3ca/go.mod h1:aWlYIMBSD8dmD7jaaAZcBL4a7/w34e1ssIuqG5EJ/ko=
+github.com/1set/barkme/bark v0.0.0-20210315163953-464d5fd48888 h1:2YOgMR5eMy6oqA36H/UcHr6JWpm9z1zcCd1vooKZQtM=
+github.com/1set/barkme/bark v0.0.0-20210315163953-464d5fd48888/go.mod h1:aWlYIMBSD8dmD7jaaAZcBL4a7/w34e1ssIuqG5EJ/ko=
 github.com/1set/gut v0.0.0-20201117175203-a82363231997 h1:za2jSkE1Rx56hTzBko3ZZ4gA/nq+rA/jVovWuAF4jyo=
 github.com/1set/gut v0.0.0-20201117175203-a82363231997/go.mod h1:DpCCAL0dgBMQdiqPUIIRpdU9zNcIZwJjW+L/8Mb30mw=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
