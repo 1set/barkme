@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/1set/barkme/bark"
 	"github.com/1set/gut/ystring"
@@ -52,15 +53,22 @@ var sendCmd = &cobra.Command{
 
 		// check if the given ringtone is valid
 		if ystring.IsNotEmpty(ringtone) {
-			isRingFound := false
-			for _, r := range bark.AllRingtones {
-				if string(r) == ringtone {
-					isRingFound = true
-					break
+			if num, err := strconv.Atoi(ringtone); err == nil {
+				if !((1 <= num) && (num <= len(bark.AllRingtones))) {
+					return fmt.Errorf("invalid ringtone index: %d", num)
 				}
-			}
-			if !isRingFound {
-				return fmt.Errorf("invalid ringtone: %v", ringtone)
+				ringtone = string(bark.AllRingtones[num-1])
+			} else {
+				isRingFound := false
+				for _, r := range bark.AllRingtones {
+					if string(r) == ringtone {
+						isRingFound = true
+						break
+					}
+				}
+				if !isRingFound {
+					return fmt.Errorf("invalid ringtone name: %v", ringtone)
+				}
 			}
 		}
 
@@ -120,7 +128,7 @@ func init() {
 
 	sendCmd.Flags().StringVarP(&title, "title", "t", "", "Title of notification")
 	sendCmd.Flags().StringVarP(&body, "body", "b", "", "Body of notification")
-	sendCmd.Flags().StringVarP(&ringtone, "ringtone", "r", "", "Ringtone of notification")
+	sendCmd.Flags().StringVarP(&ringtone, "ringtone", "r", "", "Name or index of ringtone for notification")
 	sendCmd.Flags().StringVarP(&copyText, "copy", "c", "", "Text to copy")
 	sendCmd.Flags().StringVarP(&openURL, "url", "u", "", "URL to open")
 	sendCmd.Flags().BoolVar(&forceArchive, "force-archive", false, "Force to archive notification")
