@@ -3,7 +3,7 @@ module github.com/1set/barkme
 go 1.16
 
 require (
-	bitbucket.org/ai69/so-colorful v0.0.2
+	bitbucket.org/ai69/colorlogo v0.1.1
 	github.com/1set/barkme/bark v0.0.0-20210315164954-1c056c857e27
 	github.com/1set/gut v0.0.0-20201117175203-a82363231997
 	github.com/mitchellh/go-homedir v1.1.0

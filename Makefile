@@ -9,7 +9,7 @@ FLAGS="-s -w"
 
 default:
 	@echo "build target is required"
-	@exit 100
+	@exit 1
 
 build:
 	$(GOBUILD) -v -trimpath -ldflags $(FLAGS) -o $(BINARY)
@@ -24,3 +24,7 @@ install:
 	$(GOINSTALL) -v -trimpath -ldflags $(FLAGS) .
 preview: build
 	./$(BINARY)
+
+clean:
+	rm -f $(BINARY)
+	rm -f $(BINARY).exe
