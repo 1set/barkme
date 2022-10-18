@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/1set/barkme/util"
+	"bitbucket.org/ai69/amoy"
 	"github.com/1set/gut/yos"
 	"github.com/1set/gut/ystring"
 	homedir "github.com/mitchellh/go-homedir"
@@ -74,7 +74,7 @@ func init() {
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
 	// Set loggers
-	logger := util.NewLogger(logFile, debugMode)
+	logger := amoy.NewLogger(logFile, debugMode)
 	logger.SetLogLevel(logLevel)
 	log = logger.LoggerSugared().With(zap.Int("pid", os.Getpid()))
 

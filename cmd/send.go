@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/1set/barkme/bark"
 	"github.com/1set/gut/ystring"
@@ -81,32 +82,32 @@ var sendCmd = &cobra.Command{
 		}
 
 		for i, dev := range devices {
+			timeStart := time.Now()
 			l := log.With("num", i+1, "device", dev, "option", opts)
 			switch hasTitle, hasBody := ystring.IsNotBlank(title), ystring.IsNotBlank(body); {
 			case hasTitle && hasBody:
 				if err := dev.SendMessage(title, body, opts); err != nil {
-					l.Warnw("fail to send message", "title", title, "body", body, zap.Error(err))
+					l.Warnw("fail to send message", "title", title, "body", body, "time_elapsed", time.Since(timeStart), zap.Error(err))
 				} else {
-					l.Infow("send message", "title", title, "body", body)
+					l.Infow("send message", "title", title, "body", body, "time_elapsed", time.Since(timeStart))
 				}
 			case hasTitle:
 				body = title
 				fallthrough
 			case hasBody:
 				if err := dev.SendShortMessage(body, opts); err != nil {
-					l.Warnw("fail to send short message", "body", body, zap.Error(err))
+					l.Warnw("fail to send short message", "body", body, "time_elapsed", time.Since(timeStart), zap.Error(err))
 				} else {
-					l.Infow("send short message", "body", body)
+					l.Infow("send short message", "body", body, "time_elapsed", time.Since(timeStart))
 				}
 			case !(hasTitle || hasBody):
 				fallthrough
 			default:
 				if err := dev.Ping(opts); err != nil {
-					l.Warnw("fail to ping", zap.Error(err))
+					l.Warnw("fail to ping", "time_elapsed", time.Since(timeStart), zap.Error(err))
 				} else {
-					l.Infow("ping device")
+					l.Infow("ping device", "time_elapsed", time.Since(timeStart))
 				}
-				l.Warnw("not supported message", "title", title, "body", body)
 			}
 		}
 		return nil
