@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/1set/barkme/util"
+	"bitbucket.org/ai69/amoy"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -42,7 +42,7 @@ var listDeviceCmd = &cobra.Command{
 			return devices[i][0] < devices[j][0]
 		})
 
-		fmt.Println(util.RenderTableString(header, devices))
+		fmt.Println(amoy.RenderTableString(header, devices))
 		return nil
 	},
 }

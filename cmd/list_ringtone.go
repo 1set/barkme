@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
+	"bitbucket.org/ai69/amoy"
 	"github.com/1set/barkme/bark"
-	"github.com/1set/barkme/util"
 	"github.com/spf13/cobra"
 )
 
@@ -27,7 +27,7 @@ var listRingtoneCmd = &cobra.Command{
 				string(ring),
 			})
 		}
-		fmt.Println(util.RenderTableString(header, ringtones))
+		fmt.Println(amoy.RenderTableString(header, ringtones))
 		return nil
 	},
 }
